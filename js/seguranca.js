@@ -1,8 +1,7 @@
 
 /* =========================================
    CENTRAL DE SEGURANÇA — BRADION
-   Cadastro e gerenciamento de guardiões
-   Dados mantidos em memória nesta demonstração.
+   Cadastro demonstrativo de guardiões
 ========================================= */
 
 (() => {
@@ -21,8 +20,6 @@
 
     const guardians = [];
     const maxGuardians = 2;
-
-    /* MODAIS */
 
     function openModal(
         title,
@@ -69,8 +66,6 @@
         securityScreen.appendChild(backdrop);
     }
 
-    /* ATIVAÇÃO DO BRADION */
-
     function setBradionActive(value) {
         bradionActive = value;
 
@@ -84,6 +79,8 @@
 
         activateButton.classList.toggle("is-active", bradionActive);
     }
+
+    /* ATIVAÇÃO DO BRADION */
 
     activateButton.addEventListener("click", () => {
         if (bradionActive) {
@@ -132,10 +129,8 @@
                                     onClick: () => {
                                         setBradionActive(true);
 
-                                        openModal(
-                                            "Proteção ativada",
-                                            "O BRADION está ativo nesta demonstração. Se identificar uma situação de risco, poderá orientar você sobre o que fazer."
-                                        );
+                                        // Abre automaticamente o cadastro do guardião.
+                                        openGuardianForm();
                                     }
                                 }
                             ]
@@ -151,7 +146,7 @@
     lgpdButton.addEventListener("click", () => {
         openModal(
             "Privacidade e LGPD",
-            "Este protótipo usa informações fictícias e não se conecta a sistemas bancários. Os dados inseridos no cadastro de guardiões ficam somente nesta demonstração, no navegador, e não são enviados a um servidor."
+            "Este protótipo usa informações fictícias e não se conecta a sistemas bancários. Os dados inseridos no cadastro de guardiões ficam somente nesta demonstração e não são enviados a um servidor."
         );
     });
 
@@ -182,13 +177,13 @@
 
             const avatar = document.createElement("div");
             avatar.className = "guardian-avatar";
-            avatar.textContent = guardian.name.trim().charAt(0).toUpperCase() || "?";
+            avatar.textContent = guardian.name.trim().charAt(0).toUpperCase();
 
             const info = document.createElement("div");
             info.className = "guardian-info";
 
             const name = document.createElement("strong");
-            name.textContent = guardian.name || "Guardião";
+            name.textContent = guardian.name;
 
             const details = document.createElement("small");
             details.textContent =
@@ -213,7 +208,6 @@
 
     function openGuardianForm(replaceIndex = -1) {
         const isReplacing = replaceIndex >= 0;
-
         const oldGuardian = isReplacing
             ? guardians[replaceIndex]
             : null;
@@ -255,19 +249,19 @@
                         id="guardianNameInput"
                         type="text"
                         maxlength="60"
-                        placeholder="Nome completo do guardião"
-                        autocomplete="name"
+                        placeholder="Nome do guardião"
+                        required
                     >
                 </label>
 
                 <label>
-                    Telefone com DDD
+                    Telefone
                     <input
                         id="guardianPhoneInput"
                         type="tel"
                         maxlength="16"
                         placeholder="(11) 99999-9999"
-                        autocomplete="tel"
+                        required
                     >
                 </label>
 
@@ -279,24 +273,23 @@
                         inputmode="numeric"
                         maxlength="14"
                         placeholder="000.000.000-00"
-                        autocomplete="off"
                     >
                 </label>
 
                 <label>
                     Grau de parentesco
-                    <select id="guardianRelationshipInput">
+                    <select id="guardianRelationshipInput" required>
                         <option value="">Selecione</option>
                         <option>Familiar</option>
-                        <option>Pai</option>
-                        <option>Mãe</option>
-                        <option>Filho(a)</option>
-                        <option>Irmão(ã)</option>
-                        <option>Cônjuge/companheiro(a)</option>
                         <option>Amigo(a)</option>
+                        <option>Cônjuge/companheiro(a)</option>
                         <option>Outro</option>
                     </select>
                 </label>
+
+                <p class="form-error" id="guardianFormError">
+                    Confira o nome, o telefone e o relacionamento.
+                </p>
 
                 <div class="demo-modal-actions">
                     <button
@@ -304,7 +297,7 @@
                         class="modal-secondary"
                         id="cancelGuardianButton"
                     >
-                        Cancelar
+                        Fechar
                     </button>
 
                     <button type="submit" class="modal-primary">
@@ -326,7 +319,7 @@
                 oldGuardian.name;
 
             phoneInput.value = oldGuardian.phone;
-            cpfInput.value = oldGuardian.cpf;
+            cpfInput.value = oldGuardian.cpf || "";
 
             modal.querySelector("#guardianRelationshipInput").value =
                 oldGuardian.relationship;
@@ -364,7 +357,7 @@
             phoneInput.value = digits;
         });
 
-        /* MÁSCARA DE CPF — SEM BLOQUEIO DE CADASTRO */
+        /* MÁSCARA DE CPF — SEM BLOQUEIO DE VALIDAÇÃO */
 
         cpfInput.addEventListener("input", () => {
             let digits = cpfInput.value
@@ -373,17 +366,17 @@
 
             if (digits.length > 9) {
                 digits = digits.replace(
-                    /^(\d{3})(\d{3})(\d{3})(\d{0,2})/,
+                    /^(\d{3})(\d{3})(\d{3})(\d{0,2}).*/,
                     "$1.$2.$3-$4"
                 );
             } else if (digits.length > 6) {
                 digits = digits.replace(
-                    /^(\d{3})(\d{3})(\d{0,3})/,
+                    /^(\d{3})(\d{3})(\d{0,3}).*/,
                     "$1.$2.$3"
                 );
             } else if (digits.length > 3) {
                 digits = digits.replace(
-                    /^(\d{3})(\d{0,3})/,
+                    /^(\d{3})(\d{0,3}).*/,
                     "$1.$2"
                 );
             }
@@ -391,13 +384,16 @@
             cpfInput.value = digits;
         });
 
-        /* CANCELAR */
+        /*
+         * FECHAR FORMULÁRIO
+         * O BRADION permanece ativado.
+         */
 
         modal.querySelector("#cancelGuardianButton").addEventListener("click", () => {
             backdrop.remove();
         });
 
-        /* SALVAR CADASTRO OU TROCA — SEM VALIDAÇÃO BLOQUEANTE */
+        /* SALVAR CADASTRO OU TROCA */
 
         form.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -406,17 +402,30 @@
                 .value.trim();
 
             const phone = phoneInput.value.trim();
+
             const cpf = cpfInput.value.trim();
 
             const relationship = modal.querySelector(
                 "#guardianRelationshipInput"
             ).value;
 
+            const phoneDigits = phone.replace(/\D/g, "");
+
+            if (
+                name.length < 3 ||
+                phoneDigits.length < 10 ||
+                !relationship
+            ) {
+                modal.querySelector("#guardianFormError").style.display =
+                    "block";
+                return;
+            }
+
             const guardian = {
-                name: name || "Guardião",
-                phone: phone || "Telefone não informado",
+                name,
+                phone,
                 cpf,
-                relationship: relationship || "Não informado"
+                relationship
             };
 
             const selectedIndex = isReplacing
@@ -427,23 +436,17 @@
                 guardians[selectedIndex] = guardian;
             } else if (guardians.length < maxGuardians) {
                 guardians.push(guardian);
-            } else {
-                backdrop.remove();
-
-                openModal(
-                    "Limite de guardiões atingido",
-                    "Você já cadastrou duas pessoas. Para adicionar outra, escolha qual deseja substituir."
-                );
-
-                return;
             }
 
             backdrop.remove();
+
             renderGuardians();
 
             openModal(
                 isReplacing ? "Guardião atualizado" : "Guardião cadastrado",
-                "O cadastro foi concluído nesta demonstração.",
+                isReplacing
+                    ? "Os dados do guardião foram atualizados nesta demonstração."
+                    : "O cadastro foi concluído nesta demonstração.",
                 [
                     {
                         label: "Continuar na segurança",
@@ -473,17 +476,7 @@
                 {
                     label: "Escolher pessoa",
                     primary: true,
-                    onClick: () => {
-                        openModal(
-                            "Quem deseja substituir?",
-                            "Escolha qual guardião deseja substituir.",
-                            guardians.map((guardian, index) => ({
-                                label: guardian.name,
-                                primary: index === 0,
-                                onClick: () => openGuardianForm(index)
-                            }))
-                        );
-                    }
+                    onClick: () => openGuardianForm(0)
                 }
             ]
         );
