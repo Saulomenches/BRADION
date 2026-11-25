@@ -8,7 +8,24 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* PAINEL PIX — NOVA TELA */
+        .security-shield-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .security-shield-icon svg {
+            display: block;
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* PAINEL PIX */
         .pix-screen {
             display: flex;
             flex-direction: column;
@@ -237,7 +254,7 @@
             font-weight: 600;
         }
 
-        /* ÍCONES PIX — TRANSFERIR E RECEBER */
+        /* ÍCONES PIX — MANTIDOS */
         .pix-action-icon svg {
             display: block;
             width: 29px;
@@ -450,7 +467,7 @@
     <section class="screen security-screen hidden" id="securityScreen">
         <header class="security-header">
             <div class="status-bar">
-                <span class="status-time\">13:22</span>
+                <span class="status-time">13:22</span>
                 <div class="status-icons">
                     <svg class="signal-icon" viewBox="0 0 20 16" aria-hidden="true">
                         <rect x="1" y="10" width="3" height="5" rx="1"/>
@@ -466,7 +483,6 @@
             <div class="security-heading">
                 <button class="back-button" id="backHomeButton" aria-label="Voltar">‹</button>
                 <div><span class="security-brand">bradesco</span><h1>Segurança</h1></div>
-                <img src="assets/img/logo-bradion.png" alt="Logo BRADION" class="security-header-logo">
             </div>
         </header>
 
@@ -504,7 +520,6 @@
             <section class="guardians-section">
                 <div class="guardians-heading">
                     <div><h2>Meus Guardiões</h2><p id="guardianCounter">0 de 2 cadastrados</p></div>
-                    <img src="assets/img/logo-bradion.png" alt="Logo BRADION" class="guardian-shield">
                 </div>
                 <div id="guardianList" class="guardian-list">
                     <div class="guardian-empty">
@@ -521,12 +536,20 @@
         <nav class="bottom-navigation security-bottom-navigation">
             <button class="bottom-nav-item" id="securityNavHome"><span class="bottom-nav-icon">⌂</span><span>Início</span></button>
             <button class="bottom-nav-item" id="securityNavPix"><span class="bottom-nav-icon">◇</span><span>Pix</span></button>
-            <button class="bottom-nav-item active"><span class="bottom-nav-icon">♢</span><span>Segurança</span></button>
+            <button class="bottom-nav-item active" aria-label="Segurança">
+                <span class="bottom-nav-icon security-shield-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg>
+                </span>
+                <span>Segurança</span>
+            </button>
             <button class="bottom-nav-item" id="securityNavMenu"><span class="bottom-nav-icon">▦</span><span>Menu</span></button>
         </nav>
     </section>
 
-    <!-- NOVA TELA: PIX -->
+    <!-- TELA PIX -->
     <section class="screen pix-screen hidden" id="pixScreen">
         <header class="pix-header">
             <div class="status-bar">
