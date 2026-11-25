@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -490,12 +491,8 @@
 
             <section class="guardians-section">
                 <div class="guardians-heading">
-                    <div>
-                        <h2>Meus Guardiões</h2>
-                        <p id="guardianCounter">0 de 2 cadastrados</p>
-                    </div>
+                    <div><h2>Meus Guardiões</h2><p id="guardianCounter">0 de 2 cadastrados</p></div>
                 </div>
-
                 <div id="guardianList" class="guardian-list">
                     <div class="guardian-empty">
                         <div class="guardian-empty-icon">♙</div>
@@ -503,50 +500,30 @@
                         <p>Cadastre alguém de confiança para ajudar na sua proteção.</p>
                     </div>
                 </div>
-
                 <button class="add-guardian-button" id="manageGuardiansButton">+ Adicionar guardião</button>
                 <p class="guardian-limit">Você pode cadastrar até 2 pessoas de confiança.</p>
             </section>
         </div>
 
         <nav class="bottom-navigation security-bottom-navigation">
-            <button class="bottom-nav-item" id="securityNavHome">
-                <span class="bottom-nav-icon">⌂</span>
-                <span>Início</span>
-            </button>
-
-            <button class="bottom-nav-item" id="securityNavPix">
-                <span class="bottom-nav-icon">◇</span>
-                <span>Pix</span>
-            </button>
-
+            <button class="bottom-nav-item" id="securityNavHome"><span class="bottom-nav-icon">⌂</span><span>Início</span></button>
+            <button class="bottom-nav-item" id="securityNavPix"><span class="bottom-nav-icon">◇</span><span>Pix</span></button>
             <button class="bottom-nav-item active">
                 <span class="bottom-nav-icon">
                     <svg viewBox="0 0 32 36" width="24" height="26" aria-hidden="true">
                         <path d="M16 2 29 7v9c0 8-5.5 14-13 18C8.5 30 3 24 3 16V7L16 2Z"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2.5"
-                              stroke-linejoin="round"/>
+                              fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
                         <path d="m10 17 4 4 8-9"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"/>
+                              fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
                 <span>Segurança</span>
             </button>
-
-            <button class="bottom-nav-item" id="securityNavMenu">
-                <span class="bottom-nav-icon">▦</span>
-                <span>Menu</span>
-            </button>
+            <button class="bottom-nav-item" id="securityNavMenu"><span class="bottom-nav-icon">▦</span><span>Menu</span></button>
         </nav>
     </section>
 
-    <!-- NOVA TELA: PIX -->
+    <!-- TELA PIX -->
     <section class="screen pix-screen hidden" id="pixScreen">
         <header class="pix-header">
             <div class="status-bar">
@@ -578,13 +555,35 @@
 
             <div class="pix-action-grid">
                 <button class="pix-action" type="button">
-                    <span class="pix-action-icon">↗</span>
+                    <span class="pix-action-icon">
+                        <svg viewBox="0 0 32 32" width="28" height="28"
+                             fill="none" xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true">
+                            <path d="M7 25 25 7M13 7h12v12"
+                                  stroke="currentColor"
+                                  stroke-width="2.2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </span>
                     <span>Transferir</span>
                 </button>
+
                 <button class="pix-action" type="button">
-                    <span class="pix-action-icon">↙</span>
+                    <span class="pix-action-icon">
+                        <svg viewBox="0 0 32 32" width="28" height="28"
+                             fill="none" xmlns="http://www.w3.org/2000/svg"
+                             aria-hidden="true">
+                            <path d="M25 7 7 25M19 25H7V13"
+                                  stroke="currentColor"
+                                  stroke-width="2.2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </span>
                     <span>Receber</span>
                 </button>
+
                 <button class="pix-action" type="button">
                     <span class="pix-action-icon">▤</span>
                     <span>Minhas chaves</span>
