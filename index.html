@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ed145b">
+    <title>Bradesco | BRADION</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* PAINEL PIX — NOVA TELA */
+        .pix-screen {
+            display: flex;
+            flex-direction: column;
+            background: #f5f5f5;
+            color: #242424;
+        }
+
+        .pix-header {
+            position: relative;
+            flex-shrink: 0;
+            min-height: 155px;
+            padding: 52px 20px 22px;
+            color: #fff;
+            background: linear-gradient(135deg,#f4145c 0%,#e30b50 55%,#b90049 100%);
+            border-radius: 0 0 22px 22px;
+        }
+
+        .pix-header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pix-back {
+            width: 35px;
+            height: 38px;
+            color: #fff;
+            background: transparent;
+            font-size: 34px;
+        }
+
+        .pix-header h1 {
+            font-size: 22px;
+        }
+
+        .pix-header p {
+            margin: 7px 0 0 47px;
+            font-size: 12px;
+            opacity: .9;
+        }
+
+        .pix-content {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 20px 17px 30px;
+        }
+
+        .pix-intro {
+            margin-bottom: 19px;
+        }
+
+        .pix-intro h2 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .pix-intro p {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .pix-action-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .pix-action {
+            min-height: 82px;
+            padding: 12px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #bd0b48;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 7px rgba(0,0,0,.06);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .pix-action-icon {
+            font-size: 25px;
+        }
+
+        .pix-transfer-card {
+            padding: 18px;
+            background: #fff;
+            border-radius: 17px;
+            box-shadow: 0 3px 10px rgba(0,0,0,.07);
+        }
+
+        .pix-transfer-card h2 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .pix-transfer-description {
+            margin-bottom: 18px;
+            color: #777;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .pix-field {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .pix-field label {
+            display: block;
+            margin-bottom: 7px;
+            color: #555;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pix-field input {
+            width: 100%;
+            height: 46px;
+            padding: 0 12px;
+            color: #333;
+            background: #fafafa;
+            border: 1px solid #e4e4e4;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .pix-field input:focus {
+            outline: 2px solid rgba(237,20,91,.18);
+            border-color: #ed145b;
+        }
+
+        .pix-recipient {
+            padding: 12px;
+            margin-bottom: 16px;
+            background: #fff3f6;
+            border: 1px solid #f7d5e0;
+            border-radius: 12px;
+        }
+
+        .pix-recipient-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #9a1744;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pix-recipient strong {
+            display: block;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .pix-recipient small {
+            display: block;
+            margin-top: 4px;
+            color: #777;
+            font-size: 11px;
+        }
+
+        .pix-amount {
+            position: relative;
+        }
+
+        .pix-amount input {
+            padding-left: 42px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .pix-currency {
+            position: absolute;
+            left: 13px;
+            top: 36px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .pix-demo-notice {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            padding: 11px;
+            margin-top: 5px;
+            color: #72551a;
+            background: #fff8e8;
+            border-radius: 10px;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .pix-review-button {
+            width: 100%;
+            height: 49px;
+            margin-top: 18px;
+            color: #fff;
+            background: linear-gradient(100deg,#ed145b,#bd0b48);
+            border-radius: 28px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .pix-footer-note {
+            margin-top: 13px;
+            color: #999;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .pix-back-home {
+            width: 100%;
+            margin-top: 13px;
+            padding: 12px;
+            color: #bd0b48;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+<main id="app">
+
+    <!-- LOGIN -->
+    <section class="screen login-screen" id="loginScreen">
+        <div class="background-shape shape-one"></div>
+        <div class="background-shape shape-two"></div>
+
+        <div class="status-bar">
+            <span class="status-time">13:21</span>
+            <div class="status-icons">
+                <svg class="signal-icon" viewBox="0 0 20 16" aria-hidden="true">
+                    <rect x="1" y="10" width="3" height="5" rx="1"/>
+                    <rect x="6" y="7" width="3" height="8" rx="1"/>
+                    <rect x="11" y="4" width="3" height="11" rx="1"/>
+                    <rect x="16" y="1" width="3" height="14" rx="1"/>
+                </svg>
+                <span class="network-type">5G</span>
+                <div class="battery"><span>47</span></div>
+            </div>
+        </div>
+
+        <header class="top-header">
+            <button class="header-icon" id="menuButton" aria-label="Menu">
+                <span class="menu-symbol">☰</span>
+                <span class="notification-dot"></span>
+            </button>
+            <button class="header-icon" id="notificationButton" aria-label="Notificações">♧</button>
+        </header>
+
+        <div class="brand">
+            <img src="assets/img/bradesco-logo-branco.png" alt="Símbolo Bradesco" class="brand-logo">
+            <span>bradesco</span>
+        </div>
+
+        <div class="account-area">
+            <button class="account-title" id="accountButton">
+                <span>Minha Conta</span>
+                <span class="chevron">⌄</span>
+            </button>
+            <div class="account-details">
+                <span>Agência **08</span>
+                <span>Conta ****03-9</span>
+            </div>
+        </div>
+
+        <div class="login-actions">
+            <button class="enter-button" id="enterButton">Entrar</button>
+            <button class="other-account" id="otherAccountButton">Acessar outra conta</button>
+        </div>
+
+        <nav class="quick-access login-quick-access">
+            <button class="quick-item" data-action="security-key">
+                <span class="quick-icon">♙</span>
+                <span>Chave de<br>Segurança</span>
+            </button>
+            <button class="quick-item" data-action="bia">
+                <span class="quick-icon">▣</span>
+                <span class="bia-dot"></span>
+                <span>BIA</span>
+            </button>
+            <button class="quick-item" data-action="pix">
+                <span class="quick-icon">◆</span>
+                <span>PIX</span>
+            </button>
+        </nav>
+    </section>
+
+    <!-- HOME -->
+    <section class="screen home-screen hidden" id="homeScreen">
+        <header class="home-header">
+            <div class="status-bar home-status">
+                <span class="status-time">13:22</span>
+                <div class="status-icons">
+                    <svg class="signal-icon" viewBox="0 0 20 16" aria-hidden="true">
+                        <rect x="1" y="10" width="3" height="5" rx="1"/>
+                        <rect x="6" y="7" width="3" height="8" rx="1"/>
+                        <rect x="11" y="4" width="3" height="11" rx="1"/>
+                        <rect x="16" y="1" width="3" height="14" rx="1"/>
+                    </svg>
+                    <span class="network-type">5G</span>
+                    <div class="battery"><span>46</span></div>
+                </div>
+            </div>
+
+            <div class="home-greeting">
+                <h1>Olá, Minha Conta</h1>
+                <div class="home-header-actions">
+                    <button class="home-header-button" id="homeNotifications" aria-label="Notificações">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/>
+                        </svg>
+                    </button>
+                    <button class="home-header-button" id="logoutButton" aria-label="Sair">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M10 4H4v16h6M14 8l4 4-4 4M8 12h10"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <button class="bia-banner" id="biaButton">
+                <span class="bia-avatar">BIA</span>
+                <span>Como posso ajudar?</span>
+                <span class="bia-send">▷</span>
+            </button>
+        </header>
+
+        <div class="home-content">
+            <section class="balance-card">
+                <div class="balance-top"><strong>Saldo</strong></div>
+                <div class="balance-bottom">
+                    <span class="balance-value masked" id="balanceValue">R$ 8.450,00</span>
+                    <button class="balance-eye" id="toggleBalance" aria-label="Mostrar ou ocultar saldo">
+                        <svg id="eyeIcon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                    <button class="statement-button" id="statementButton">Ver extrato</button>
+                </div>
+            </section>
+
+            <section class="main-shortcuts">
+                <button class="main-shortcut" id="pixButton">
+                    <svg class="shortcut-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M12 3 3 12l9 9 9-9-9-9ZM20 11l9 9-9 9-9-9 9-9Z"/>
+                        <path d="m12 21 4-4 4 4-4 4-4-4Z"/>
+                    </svg>
+                    <span>Pix</span>
+                </button>
+
+                <button class="main-shortcut security-shortcut" id="securityButton">
+                    <svg class="shortcut-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <path d="M16 3 27 7v8c0 7-4.5 11.5-11 14-6.5-2.5-11-7-11-14V7l11-4Z"/>
+                        <path d="m11 16 3.5 3.5L21 12"/>
+                    </svg>
+                    <span>Segurança</span>
+                    <span class="security-indicator"></span>
+                </button>
+
+                <button class="main-shortcut" id="payButton">
+                    <svg class="shortcut-icon" viewBox="0 0 32 32" aria-hidden="true">
+                        <rect x="3" y="7" width="26" height="18" rx="3"/>
+                        <path d="M3 13h26M8 20h7"/>
+                    </svg>
+                    <span>Pagar</span>
+                </button>
+            </section>
+
+            <section class="quick-section">
+                <h2>Acesso rápido</h2>
+                <div class="quick-services">
+                    <button class="service-item">
+                        <span class="service-icon"><svg viewBox="0 0 32 32"><rect x="3" y="7" width="26" height="18" rx="3"/><path d="M3 13h26M7 20h8"/></svg></span>
+                        <span>Cartões</span>
+                    </button>
+                    <button class="service-item">
+                        <span class="service-icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M19 11c-1-2-7-2-7 1 0 4 8 2 8 6 0 3-6 4-9 1M16 7v18"/></svg></span>
+                        <span>Empréstimos</span>
+                    </button>
+                    <button class="service-item">
+                        <span class="service-icon"><svg viewBox="0 0 32 32"><path d="M16 3 27 7v8c0 7-4.5 11.5-11 14-6.5-2.5-11-7-11-14V7l11-4Z"/><path d="m11 16 3.5 3.5L21 12"/></svg></span>
+                        <span>Seguros</span>
+                    </button>
+                    <button class="service-item">
+                        <span class="service-icon"><svg viewBox="0 0 32 32"><path d="M16 3c-3 5-8 5-8 11a8 8 0 0 0 16 0c0-6-5-6-8-11Z"/><path d="M16 12v10M11 17h10"/></svg></span>
+                        <span>Capitalização</span>
+                    </button>
+                    <button class="service-item">
+                        <span class="service-icon"><svg viewBox="0 0 32 32"><path d="M4 25 10 9l6 10 5-8 7 14H4Z"/></svg></span>
+                        <span>Investimentos</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="piggy-section">
+                <h2>Cofrinhos</h2>
+                <button class="piggy-card" id="piggyButton">
+                    <span class="piggy-icon">♧</span>
+                    <span class="piggy-text"><strong>Meus cofrinhos</strong><small>Organize seus objetivos</small></span>
+                    <span class="card-chevron">›</span>
+                </button>
+            </section>
+        </div>
+
+        <nav class="bottom-navigation">
+            <button class="bottom-nav-item active" data-tab="home"><span class="bottom-nav-icon">⌂</span><span>Início</span></button>
+            <button class="bottom-nav-item" data-tab="shop"><span class="bottom-nav-icon">♧</span><span>Shop</span></button>
+            <button class="bottom-nav-item" data-tab="profile"><span class="bottom-nav-icon">♙</span><span>Perfil</span></button>
+            <button class="bottom-nav-item" data-tab="services"><span class="bottom-nav-icon">▦</span><span>Serviços</span></button>
+        </nav>
+    </section>
+
+    <!-- CENTRAL DE SEGURANÇA -->
+    <section class="screen security-screen hidden" id="securityScreen">
+        <header class="security-header">
+            <div class="status-bar">
+                <span class="status-time">13:22</span>
+                <div class="status-icons">
+                    <svg class="signal-icon" viewBox="0 0 20 16" aria-hidden="true">
+                        <rect x="1" y="10" width="3" height="5" rx="1"/>
+                        <rect x="6" y="7" width="3" height="8" rx="1"/>
+                        <rect x="11" y="4" width="3" height="11" rx="1"/>
+                        <rect x="16" y="1" width="3" height="14" rx="1"/>
+                    </svg>
+                    <span class="network-type">5G</span>
+                    <div class="battery"><span>46</span></div>
+                </div>
+            </div>
+
+            <div class="security-heading">
+                <button class="back-button" id="backHomeButton" aria-label="Voltar">‹</button>
+                <div><span class="security-brand">bradesco</span><h1>Segurança</h1></div>
+                <img src="assets/img/logo-bradion.png" alt="Logo BRADION" class="security-header-logo">
+            </div>
+        </header>
+
+        <div class="security-content">
+            <section class="bradion-card">
+                <div class="bradion-card-top">
+                    <img src="assets/img/logo-bradion.png" alt="Logo BRADION" class="bradion-symbol">
+                    <div class="bradion-title"><strong>BRADION</strong><span>Modo Guardião</span></div>
+                    <span class="bradion-status" id="bradionStatus">Desativado</span>
+                </div>
+                <p class="bradion-description">Uma camada inteligente de proteção para ajudar a identificar situações suspeitas.</p>
+                <button class="bradion-toggle-button" id="activateBradionButton">Ativar proteção</button>
+            </section>
+
+            <section class="security-features">
+                <h2>Sua proteção</h2>
+                <article class="security-feature-card">
+                    <div class="feature-icon">⌑</div>
+                    <div class="feature-copy"><strong>Proteção de Pix</strong><p>Mais atenção em transferências que apresentem sinais de risco.</p></div>
+                    <span class="feature-check">✓</span>
+                </article>
+                <article class="security-feature-card">
+                    <div class="feature-icon">♙</div>
+                    <div class="feature-copy"><strong>Modo assistido</strong><p>Conte com pessoas de confiança em situações suspeitas.</p></div>
+                    <span class="feature-check">✓</span>
+                </article>
+            </section>
+
+            <button class="privacy-card" id="lgpdButton">
+                <span class="privacy-icon">♙</span>
+                <span class="privacy-copy"><strong>Privacidade e LGPD</strong><small>Saiba como seus dados são protegidos</small></span>
+                <span class="privacy-arrow">›</span>
+            </button>
+
+            <section class="guardians-section">
+                <div class="guardians-heading">
+                    <div>
+                        <h2>Meus Guardiões</h2>
+                        <p id="guardianCounter">0 de 2 cadastrados</p>
+                    </div>
+                </div>
+
+                <div id="guardianList" class="guardian-list">
+                    <div class="guardian-empty">
+                        <div class="guardian-empty-icon">♙</div>
+                        <strong>Você ainda não tem um guardião</strong>
+                        <p>Cadastre alguém de confiança para ajudar na sua proteção.</p>
+                    </div>
+                </div>
+
+                <button class="add-guardian-button" id="manageGuardiansButton">+ Adicionar guardião</button>
+                <p class="guardian-limit">Você pode cadastrar até 2 pessoas de confiança.</p>
+            </section>
+        </div>
+
+        <nav class="bottom-navigation security-bottom-navigation">
+            <button class="bottom-nav-item" id="securityNavHome">
+                <span class="bottom-nav-icon">⌂</span>
+                <span>Início</span>
+            </button>
+
+            <button class="bottom-nav-item" id="securityNavPix">
+                <span class="bottom-nav-icon">◇</span>
+                <span>Pix</span>
+            </button>
+
+            <button class="bottom-nav-item active">
+                <span class="bottom-nav-icon">
+                    <svg viewBox="0 0 32 36" width="24" height="26" aria-hidden="true">
+                        <path d="M16 2 29 7v9c0 8-5.5 14-13 18C8.5 30 3 24 3 16V7L16 2Z"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2.5"
+                              stroke-linejoin="round"/>
+                        <path d="m10 17 4 4 8-9"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span>Segurança</span>
+            </button>
+
+            <button class="bottom-nav-item" id="securityNavMenu">
+                <span class="bottom-nav-icon">▦</span>
+                <span>Menu</span>
+            </button>
+        </nav>
+    </section>
+
+    <!-- NOVA TELA: PIX -->
+    <section class="screen pix-screen hidden" id="pixScreen">
+        <header class="pix-header">
+            <div class="status-bar">
+                <span class="status-time">13:23</span>
+                <div class="status-icons">
+                    <svg class="signal-icon" viewBox="0 0 20 16" aria-hidden="true">
+                        <rect x="1" y="10" width="3" height="5" rx="1"/>
+                        <rect x="6" y="7" width="3" height="8" rx="1"/>
+                        <rect x="11" y="4" width="3" height="11" rx="1"/>
+                        <rect x="16" y="1" width="3" height="14" rx="1"/>
+                    </svg>
+                    <span class="network-type">5G</span>
+                    <div class="battery"><span>46</span></div>
+                </div>
+            </div>
+
+            <div class="pix-header-top">
+                <button class="pix-back" id="pixBackButton" aria-label="Voltar">‹</button>
+                <h1>Pix</h1>
+            </div>
+            <p>Faça transferências de forma simples e rápida.</p>
+        </header>
+
+        <div class="pix-content">
+            <div class="pix-intro">
+                <h2>Olá, Minha Conta</h2>
+                <p>Escolha uma opção para continuar.</p>
+            </div>
+
+            <div class="pix-action-grid">
+                <button class="pix-action" type="button">
+                    <span class="pix-action-icon">↗</span>
+                    <span>Transferir</span>
+                </button>
+                <button class="pix-action" type="button">
+                    <span class="pix-action-icon">↙</span>
+                    <span>Receber</span>
+                </button>
+                <button class="pix-action" type="button">
+                    <span class="pix-action-icon">▤</span>
+                    <span>Minhas chaves</span>
+                </button>
+            </div>
+
+            <section class="pix-transfer-card">
+                <h2>Enviar Pix</h2>
+                <p class="pix-transfer-description">Preencha os dados abaixo para simular uma transferência.</p>
+
+                <div class="pix-field">
+                    <label for="pixKey">Chave Pix do destinatário</label>
+                    <input id="pixKey" type="text" value="regularizacao.conta@exemplo.invalid" readonly>
+                </div>
+
+                <div class="pix-recipient">
+                    <span class="pix-recipient-label">Destinatário identificado</span>
+                    <strong>Central de Regularização</strong>
+                    <small>Instituição demonstrativa · Conta fictícia</small>
+                </div>
+
+                <div class="pix-field pix-amount">
+                    <label for="pixAmount">Valor da transferência</label>
+                    <span class="pix-currency">R$</span>
+                    <input id="pixAmount" type="text" value="8.000,00" readonly>
+                </div>
+
+                <div class="pix-demo-notice">
+                    <span>ⓘ</span>
+                    <span>Esta é uma simulação do projeto BRADION. Nenhum valor será transferido.</span>
+                </div>
+
+                <button class="pix-review-button" id="reviewPixButton">Continuar</button>
+                <button class="pix-back-home" id="pixBackHomeButton">Voltar ao início</button>
+                <p class="pix-footer-note">Ambiente demonstrativo BRADION · Modo Guardião</p>
+            </section>
+        </div>
+    </section>
+
+</main>
+
+<script src="js/seguranca.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
